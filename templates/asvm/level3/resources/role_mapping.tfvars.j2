@@ -1,0 +1,45 @@
+role_mapping = {
+{% if asvm_resources.role_mapping.custom_role_mapping is defined %}
+  custom_role_mapping = {
+{% for key, role_mappings in asvm_resources.role_mapping.custom_role_mapping.items() %}
+    {{ key }} = {
+      project1 = {
+        lz_key = "project1"
+        "asvm_project1_LZContributors" = {
+          azuread_service_principals = {
+            keys = [ "asvm_project1_LZContributors" ]
+          }
+        }
+      }
+    }
+{% endfor %}
+  }
+{% endif %}
+{% if asvm_resources.role_mapping.built_in_role_mapping is defined %}
+  built_in_role_mapping = {
+{% for key, role_mappings in asvm_resources.role_mapping.built_in_role_mapping.items() %}
+    {{ key }} = {
+{% for resource_key, roles_objects in role_mappings.items() %}
+      {{ resource_key }} = {
+        lz_key = "{{ roles_objects.lz_key }}"
+{% for role_name, principals_objects in roles_objects.items() %}
+{% if role_name != 'lz_key' %}
+        "{{ role_name }}" = {
+{% for key_principal_type, principal_mapping in principals_objects.items() %}
+          {{ key_principal_type }} = {
+{% if principal_mapping['lz_key'] is defined %}
+            lz_key = "{{ principal_mapping['lz_key'] }}"
+{% endif %}
+            keys = {{ principal_mapping['keys']  | replace('\'','\"')}}
+          }
+{% endfor %}
+        }
+{% endif %}
+{% endfor %}
+      }
+{% endfor %}
+    }
+{% endfor %}
+  }
+{% endif %}
+}
