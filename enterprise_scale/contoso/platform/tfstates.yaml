@@ -1,0 +1,72 @@
+### Level0 ###
+launchpad:
+  lz_key_name: launchpad
+  tfstate: caf_launchpad.tfstate
+  base_config_path: launchpad
+  level: level0
+billing_subscription_role_delegations:
+  lz_key_name: billing_subscription_role_delegations
+  tfstate: billing_subscription_role_delegations.tfstate
+  base_config_path: billing
+  level: level0
+
+### Level1 ###
+management:
+  lz_key_name: management
+  tfstate: management.tfstate
+  base_config_path: management
+  level: level1
+identity:
+  lz_key_name: identity
+  tfstate: identity.tfstate
+  base_config_path: identity
+  level: level1
+eslz:
+  lz_key_name: eslz
+  tfstate: eslz.tfstate
+  base_config_path: eslz
+  level: level1
+platform_subscriptions:
+  lz_key_name: platform_subscriptions
+  tfstate: platform_subscriptions.tfstate
+  base_config_path: subscriptions
+  level: level1
+
+## Level2 ##
+virtual_wan:
+  lz_key_name: connectivity_virtual_wan
+  tfstate: connectivity_virtual_wan.tfstate
+  base_config_path: connectivity/virtual_wan
+  level: level2
+
+virtual_hubs:
+  hub1:
+    lz_key_name: connectivity_virtual_hub1
+    tfstate: connectivity_virtual_hub1.tfstate
+    base_config_path: connectivity/virtual_hub
+    level: level2
+  hub2:
+    lz_key_name: connectivity_virtual_hub2
+    tfstate: connectivity_virtual_hub2.tfstate
+    base_config_path: connectivity/virtual_hub
+    level: level2
+
+firewall_policies:
+  root:
+    lz_key_name: connectivity_firewall_policy_root
+    tfstate: connectivity_firewall_policy_root.tfstate
+    base_config_path: connectivity/firewall_policy
+    level: level2
+  non_prod:
+    lz_key_name: connectivity_firewall_policy_non_prod
+    tfstate: connectivity_firewall_policy_non_prod.tfstate
+    base_config_path: connectivity/firewall_policy
+    level: level2
+
+
+identity_adds:
+  lz_key_name: identity_adds
+  tfstate: identity_adds.tfstate
+  base_config_path: identity
+  level: level2
+
